@@ -1,41 +1,25 @@
 package com.whispon.internetfourum;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-
-
-
-public class MainActivity extends ActionBarActivity {
-    ListView listView;
-    Button addButton;
-    ArrayList<String> nameList = new ArrayList<String>(); //HUSEN list
-    ArrayAdapter<String> adapter; //name list and listView for connecting
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+/**
+ * Created by noriaki_oshita on 15/02/25.
+ */
+public class SubActivity extends Activity {
+    TextView scheduleTV;
+    TextView contentsTV;
+    Button okButton;
+    Button cancelButton;
+     @Override
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-
-        listView = (ListView) findViewById(R.id.listView);
-       addButton = (Button) findViewById(R.id.addBtn);
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        setContentView(R.id.);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
