@@ -1,5 +1,7 @@
 package com.whispon.internetfourum;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,8 +25,18 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sub);
+        setContentView(R.layout.main);
+        listView = (ListView) findViewById(R.id.listView);
+        addButton = (Button) findViewById(R.id.addBtn);
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent SubIntent = new Intent();
+                SubIntent.setClassName("com.whispon.internetfourum","com.whispon.internetfourum.SubActivity");ｔ
+                startActivity(SubIntent);
+            }
+        });
     }
 
 

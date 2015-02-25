@@ -2,6 +2,7 @@ package com.whispon.internetfourum;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -10,16 +11,17 @@ import android.widget.TextView;
 /**
  * Created by noriaki_oshita on 15/02/25.
  */
-public class SubActivity extends Activity {
-    TextView scheduleTV;
+public class SubActivity extends ActionBarActivity {
+    /*TextView scheduleTV;
     TextView contentsTV;
     Button okButton;
-    Button cancelButton;
+    Button cancelButton;*/
      @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.id.sub);
-    }
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.sub);
+
+     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
