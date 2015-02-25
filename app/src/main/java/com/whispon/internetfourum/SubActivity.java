@@ -18,7 +18,7 @@ public class SubActivity extends Activity {
      @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.id.);
+        setContentView(R.id.sub);
     }
 
     @Override
