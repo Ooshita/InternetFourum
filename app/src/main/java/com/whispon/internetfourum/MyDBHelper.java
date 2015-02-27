@@ -35,7 +35,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     //DBの作成
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = create table contents (schedule_db,schedue,contents);
+        String CREATE_TABLE = "create table contents ( id integer primary key autoincrement, schedule text not null, contents text not null );";
         db.execSQL(CREATE_TABLE);
     }
 
@@ -89,12 +89,12 @@ public class MyDBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("schedule", schedule);
         values.put("contents", contents);
-        db.update("schedule", values, "id = "+id, null);
+        db.update("contents", values, "id = "+id, null);
     }
 
     //DBからデータを消す
     public static void deleteData(int id) {
-        db.delete("schedule", "id = "+id, null);
+        db.delete("contents", "id = "+id, null);
     }
 }
 
