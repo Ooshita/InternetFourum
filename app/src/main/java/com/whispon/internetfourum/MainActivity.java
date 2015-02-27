@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent SubIntent = new Intent();
-                SubIntent.setClassName("com.whispon.internetfourum","com.whispon.internetfourum.SubActivity");ｔ
+                SubIntent.setClassName("com.whispon.internetfourum","com.whispon.internetfourum.SubActivity");
                 startActivity(SubIntent);
             }
         });

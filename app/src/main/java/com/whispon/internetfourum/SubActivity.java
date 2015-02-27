@@ -1,10 +1,12 @@
 package com.whispon.internetfourum;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,16 +14,53 @@ import android.widget.TextView;
  * Created by noriaki_oshita on 15/02/25.
  */
 public class SubActivity extends ActionBarActivity {
-    /*TextView scheduleTV;
+    TextView scheduleTV;
     TextView contentsTV;
     Button okButton;
-    Button cancelButton;*/
-     @Override
-     protected void onCreate(Bundle savedInstanceState) {
-         super.onCreate(savedInstanceState);
-         setContentView(R.layout.sub);
+    Button cancelButton;
+    int id = -1;
 
-     }
+   Boolean forUpdate = false;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.sub);
+
+        scheduleTV = (TextView) findViewById(R.id.editText);
+        contentsTV = (TextView) findViewById(R.id.editText2);
+        okButton = (Button) findViewById(R.id.addHusen);
+        cancelButton = (Button) findViewById(R.id.cancelBtn);
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processOkRequest();
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processCancelRequest();
+            }
+        });
+
+        Intent intent = getIntent();
+        if (intent!=null) {
+            int id = intent.getIntExtra("id", -1);
+            if (id!=-1) {
+                this.id = id;
+                forUpdate = true;
+                String[] nameAndPhone = new String[2];
+                MyDBHelper.getData(id, nameAndPhone);
+                scheduleTV.setText(nameAndPhone[0]);
+                contentsTV.setText(nameAndPhone[1]);
+            } else {
+                this.id = -1;
+                forUpdate = false;
+            }
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,5 +82,23 @@ public class SubActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    void processOkRequest() {
+        if (forUpdate == true) {
+            String schedule = scheduleTV.getText().toString();
+            String contents = contentsTV.getText().toString();
+            MyDBHelper.updateData(id, schedule, contents);
+        } else {
+            String schedule = scheduleTV.getText().toString();
+            String contents = contentsTV.getText().toString();
+            MyDBHelper.insertData(schedule, contents);
+        }
+        finish();
+    }
+
+    void processCancelRequest() {
+        finish();
     }
 }
