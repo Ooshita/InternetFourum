@@ -1,11 +1,13 @@
 package com.whispon.internetfourum;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +17,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+
+import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParsePushBroadcastReceiver;
+import com.parse.PushService;
+import com.parse.SaveCallback;
+
+import java.text.ParseException;
 import java.util.ArrayList;
-
-
+import java.util.LinkedList;
 
 public class MainActivity extends Activity {
     ListView listView;
@@ -32,6 +42,12 @@ public class MainActivity extends Activity {
         listView = (ListView) findViewById(R.id.listView);
         addButton = (Button) findViewById(R.id.addBtn);
 
+        //Connect to Parse.com
+        Parse.initialize(this, "CJ16cXd7zEvOCf61V2BS9BoGePQpA4IXcqViNC0w", "fJicEIyMy4ErOetLX7DgubsZRo5xlWJ1VtwhpvIl");        // Save the current Installation to Parse.
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
+        // When users indicate they are no longer Giants fans, we subscribe them.
+        //ParsePush.subscribeInBackground("CH1");
 
         //リストビューをクリックした時の処理を設定
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,6 +81,8 @@ public class MainActivity extends Activity {
         //DBの初期化
         MyDBHelper.init(this);
     }
+
+
 
 
     @Override
@@ -129,6 +147,7 @@ public class MainActivity extends Activity {
         MainActivity.this.startActivity(intent);
     }
 
+
     //データ削除の確認をとってOKなら削除する
     void deleteConfirm(int position) {
         AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
@@ -158,5 +177,7 @@ public class MainActivity extends Activity {
         MyDBHelper.deleteData(id);
         cleanSetUpListView();
     }
+
+
 
 }
