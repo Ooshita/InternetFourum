@@ -46,8 +46,6 @@ public class MainActivity extends Activity {
         Parse.initialize(this, "CJ16cXd7zEvOCf61V2BS9BoGePQpA4IXcqViNC0w", "fJicEIyMy4ErOetLX7DgubsZRo5xlWJ1VtwhpvIl");        // Save the current Installation to Parse.
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
-        // When users indicate they are no longer Giants fans, we subscribe them.
-        //ParsePush.subscribeInBackground("CH1");
 
         //リストビューをクリックした時の処理を設定
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,6 +78,9 @@ public class MainActivity extends Activity {
 
         //DBの初期化
         MyDBHelper.init(this);
+
+        Loginform login = new Loginform();
+        login.onCreate();
     }
 
 
