@@ -20,13 +20,13 @@ public class Loginform extends Application{
     public static final String TAG = Loginform.class.getSimpleName();
 
     //@Override
-    public String onCreate(String a,String b,String c,String d) {
+    public void onCreate(String a,String b,String c,String d) {
         super.onCreate();
 
         // Add your initialization code here
         //Parse.initialize(this, "CJ16cXd7zEvOCf61V2BS9BoGePQpA4IXcqViNC0w", "fJicEIyMy4ErOetLX7DgubsZRo5xlWJ1VtwhpvIl");        // Save the current Installation to Parse.
-
-        ParseUser user = new ParseUser();
+        ParseUser user;
+        user = new ParseUser();
         user.setUsername(a);
         user.setPassword(b);
         user.setEmail(c);
@@ -42,8 +42,14 @@ public class Loginform extends Application{
             public void done(com.parse.ParseException e) {
                 if (e == null) {
                     Log.d(TAG, "サインアップ成功");
+                    Intent LoginIntent = new Intent();
+                    LoginIntent.setClassName("com.whispon.internetfourum", "com.whispon.internetfourum.Login");
+                    startActivity(LoginIntent);
                 } else {
                     Log.e(TAG, "エラーによりサインアップ失敗");
+                    Intent intentAddUser = new Intent();
+                    intentAddUser.setClassName("com.whispon.internetfourum","com.whispon.internetfourum.AddUser");
+                    startActivity(intentAddUser);
                 }
             }
         });
@@ -51,8 +57,13 @@ public class Loginform extends Application{
 
         ParseUser.logInInBackground(a, b, new LogInCallback() {
             public void done(ParseUser user, com.parse.ParseException e) {
+
                 if (user != null) {
                     Log.d(TAG, "ログイン成功");
+                    Intent intentmain = new Intent();
+                    intentmain.setClassName("com.whispon.internetfourum","com.whispon.internetfourum.intentmain");
+                    startActivity(intentmain);
+
                 } else {
                     Log.e(TAG, "エラーによりログイン失敗");
                     Intent intentAddUser = new Intent();
@@ -62,11 +73,7 @@ public class Loginform extends Application{
             }
         });
 
-        Intent intentAddUser = new Intent();
-        intentAddUser.setClassName("com.whispon.internetfourum","com.whispon.internetfourum.AddUser");
-        startActivity(intentAddUser);
 
-        return a;
 
     }
 }

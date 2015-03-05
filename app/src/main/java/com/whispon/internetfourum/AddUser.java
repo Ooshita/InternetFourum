@@ -23,7 +23,7 @@ public class AddUser extends Activity{
     EditText phone;
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loginform);
+        setContentView(R.layout.adduser);
 
         adduser = (Button) findViewById(R.id.btnAddUser);
         name = (EditText) findViewById(R.id.editname);

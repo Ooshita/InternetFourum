@@ -20,14 +20,17 @@ import android.widget.ListView;
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParsePushBroadcastReceiver;
+import com.parse.ParseUser;
 import com.parse.PushService;
 import com.parse.SaveCallback;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends Activity {
     ListView listView;
@@ -42,6 +45,10 @@ public class MainActivity extends Activity {
         listView = (ListView) findViewById(R.id.listView);
         addButton = (Button) findViewById(R.id.addBtn);
 
+        Intent SubIntent = new Intent();
+        SubIntent.setClassName("com.whispon.internetfourum", "com.whispon.internetfourum.ChatActivity");
+        startActivity(SubIntent);
+        Parse.enableLocalDatastore(this);
         //Connect to Parse.com
         Parse.initialize(this, "CJ16cXd7zEvOCf61V2BS9BoGePQpA4IXcqViNC0w", "fJicEIyMy4ErOetLX7DgubsZRo5xlWJ1VtwhpvIl");        // Save the current Installation to Parse.
         ParseInstallation.getCurrentInstallation().saveInBackground();
@@ -79,8 +86,16 @@ public class MainActivity extends Activity {
         //DBの初期化
         MyDBHelper.init(this);
 
-        Loginform login = new Loginform();
-        login.onCreate();
+        /*
+        Intent UserAddIntent = new Intent();
+        UserAddIntent.setClassName("com.whispon.internetfourum", "com.whispon.internetfourum.AddUser");
+        startActivity(UserAddIntent);
+        */
+        //ParseObject.fetch();
+        //Loginform loginform = new Loginform();
+       // loginform.onCreate();
+
+
     }
 
 
