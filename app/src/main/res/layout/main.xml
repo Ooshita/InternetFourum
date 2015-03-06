@@ -7,11 +7,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/gplaypattern"
     tools:context=".MainActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/mainLayout"
+    >
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="490dp"
+        android:layout_height="450dp"
         android:id="@+id/listView"
         android:layout_gravity="center_horizontal" />
 <LinearLayout

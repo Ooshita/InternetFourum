@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class SubActivity extends ActionBarActivity {
     RelativeLayout subLayout;
     private InputMethodManager inputMethodManager;
     int id = -1;
+    ImageView imageBack;
 
    Boolean forUpdate = false;
     @Override
@@ -39,7 +41,6 @@ public class SubActivity extends ActionBarActivity {
         cancelButton = (Button) findViewById(R.id.cancelBtn);
         inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         subLayout = (RelativeLayout) findViewById(R.id.mainLayout);
-        final View subLayout =findViewById(R.id.mainLayout);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +55,8 @@ public class SubActivity extends ActionBarActivity {
                 processCancelRequest();
             }
         });
+
+        imageBack = (ImageView) findViewById(R.id.back);
 
         Intent intent = getIntent();
         if (intent!=null) {

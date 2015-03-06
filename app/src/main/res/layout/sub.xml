@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SubActivity"
-    android:id="@+id/mainLayout"
+    android:id="@+id/subLayout"
     android:weightSum="1"
-
-    android:background="@drawable/nekotyan"
+    android:background="@drawable/gplaypattern"
     >
 
     <ImageView
