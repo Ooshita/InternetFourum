@@ -24,13 +24,11 @@ public class Setup extends ActionBarActivity {
     Button setup;
     private static final int REQUEST_GALLERY = 0;
     ImageView imageView;
-    ImageView ivback;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setup);
         imageView =(ImageView) findViewById(R.id.back);
-        ivback = (ImageView) findViewById(R.id.ivback);
-
         setup = (Button) findViewById(R.id.btnChoise);
 
         setup.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +53,7 @@ public class Setup extends ActionBarActivity {
                 BufferedInputStream inputStream = new BufferedInputStream(getContentResolver().openInputStream(data.getData()));
                 Bitmap image = BitmapFactory.decodeStream(inputStream);
                 imageView.setImageBitmap(image);
-                ivback.setImageBitmap(image);
+
 
             } catch (Exception e) {
 
