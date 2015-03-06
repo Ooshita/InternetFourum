@@ -1,13 +1,18 @@
 package com.whispon.internetfourum;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -18,6 +23,8 @@ public class SubActivity extends ActionBarActivity {
     TextView contentsTV;
     Button okButton;
     Button cancelButton;
+    RelativeLayout subLayout;
+    private InputMethodManager inputMethodManager;
     int id = -1;
 
    Boolean forUpdate = false;
@@ -30,11 +37,15 @@ public class SubActivity extends ActionBarActivity {
         contentsTV = (TextView) findViewById(R.id.editText2);
         okButton = (Button) findViewById(R.id.addHusen);
         cancelButton = (Button) findViewById(R.id.cancelBtn);
+        inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        subLayout = (RelativeLayout) findViewById(R.id.mainLayout);
+        final View subLayout =findViewById(R.id.mainLayout);
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 processOkRequest();
+
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +70,8 @@ public class SubActivity extends ActionBarActivity {
                 forUpdate = false;
             }
         }
+
+
 
     }
 
@@ -97,8 +110,18 @@ public class SubActivity extends ActionBarActivity {
         }
         finish();
     }
-
+//キーボードを隠す処理
     void processCancelRequest() {
         finish();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //キーボードを隠す
+        inputMethodManager.hideSoftInputFromWindow(subLayout.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        //背景にフォーカスを移す
+        subLayout.requestFocus();
+
+        return false;
     }
 }

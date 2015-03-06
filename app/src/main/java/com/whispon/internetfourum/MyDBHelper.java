@@ -61,6 +61,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
             int id = cursor.getInt(cursor.getColumnIndex("id"));
             String schedule = cursor.getString(cursor.getColumnIndex("schedule"));
             results.add(id+":"+schedule);
+            //results.add(schedule);
+
             cursor.moveToNext();
         }
         return results;

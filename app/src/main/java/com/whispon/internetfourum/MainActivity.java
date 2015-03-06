@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,25 +17,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-
-import com.parse.Parse;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
-import com.parse.ParsePush;
-import com.parse.ParsePushBroadcastReceiver;
-import com.parse.ParseUser;
-import com.parse.PushService;
-import com.parse.SaveCallback;
-
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
     ListView listView;
     Button addButton;
+    Button setupBtn;
     ArrayList<String> nameList = new ArrayList<String>(); //HUSEN list
     ArrayAdapter<String> adapter; //name list and listView for connecting
 
@@ -44,14 +34,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         listView = (ListView) findViewById(R.id.listView);
         addButton = (Button) findViewById(R.id.addBtn);
-
-        Intent SubIntent = new Intent();
-        SubIntent.setClassName("com.whispon.internetfourum", "com.whispon.internetfourum.ChatActivity");
-        startActivity(SubIntent);
-        Parse.enableLocalDatastore(this);
-        //Connect to Parse.com
-        Parse.initialize(this, "CJ16cXd7zEvOCf61V2BS9BoGePQpA4IXcqViNC0w", "fJicEIyMy4ErOetLX7DgubsZRo5xlWJ1VtwhpvIl");        // Save the current Installation to Parse.
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        setupBtn = (Button) findViewById(R.id.btnsettei);
 
 
         //リストビューをクリックした時の処理を設定
@@ -70,6 +53,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        setupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent SetupIntent = new Intent();
+                SetupIntent.setClassName("com.whispon.internetfourum","com.whispon.internetfourum.Setup");
+                startActivity(SetupIntent);
+            }
+        });
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,26 +72,15 @@ public class MainActivity extends Activity {
         });
 
         //名前の一覧(ArrayList)をリストビューと関連付ける
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, nameList);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item,nameList);
         listView.setAdapter(adapter);
 
         //DBの初期化
         MyDBHelper.init(this);
 
-        /*
-        Intent UserAddIntent = new Intent();
-        UserAddIntent.setClassName("com.whispon.internetfourum", "com.whispon.internetfourum.AddUser");
-        startActivity(UserAddIntent);
-        */
-        //ParseObject.fetch();
-        //Loginform loginform = new Loginform();
-       // loginform.onCreate();
 
 
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,9 +138,8 @@ public class MainActivity extends Activity {
     void openSubActivityForUpdate(int position) {
         String s = nameList.get(position);
         int id = Integer.parseInt(s.substring(0, s.indexOf(":")));
-
         Intent intent = new Intent(MainActivity.this, SubActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("id",id);
         MainActivity.this.startActivity(intent);
     }
 
@@ -187,13 +167,11 @@ public class MainActivity extends Activity {
     //実際にデータを削除する処理
     void deleteData(int position) {
         String s = nameList.get(position);
-        Log.d("debug", "deleteData(). s=" + s);
-        int id = Integer.parseInt(s.substring(0, s.indexOf(":")));
-        Log.d("debug", "deleteData(). id=" + id);
+        Log.d("debug","deleteData(). s="+s);
+        int id = Integer.parseInt(s.substring(0,s.indexOf(":")));
+        Log.d("debug","deleteData(). id="+id);
         MyDBHelper.deleteData(id);
         cleanSetUpListView();
     }
-
-
 
 }
